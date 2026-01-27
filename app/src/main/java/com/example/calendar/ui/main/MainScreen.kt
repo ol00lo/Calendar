@@ -14,11 +14,16 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun MainScreen(viewModel: MainViewModel){
+fun MainScreen(
+    viewModel: MainViewModel,
+    onOpenCalendar: () -> Unit
+) {
     val counter = viewModel.counter.value
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp)
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
     ) {
         Text(
             text = "My Calendar",
@@ -27,10 +32,10 @@ fun MainScreen(viewModel: MainViewModel){
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        Text( text = "Count of click: $counter")
+        Text(text = "Count of click: $counter")
 
-        Button(onClick = { viewModel.onButtonClick() }) {
-            Text("click")
+        Button(onClick = { onOpenCalendar() }) {
+            Text("Open Calendar")
         }
     }
 }
