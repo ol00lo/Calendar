@@ -4,14 +4,34 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.State
 
-
 class MainViewModel : ViewModel() {
 
-    private val _counter = mutableStateOf(0)
-    val counter: State<Int> = _counter
+    private val _uiState = mutableStateOf(
+        MainUiState(
+            recentItems = listOf(
+                TrackItem("Run", "🏃‍♀️"),
+                TrackItem("Smoke", "🚬"),
+                TrackItem("Yoga", "🧘‍♀️")
+            )
+        )
+    )
+    val uiState: State<MainUiState> = _uiState
 
-    fun onButtonClick() {
-        _counter.value++
+    fun onTabSelected(tab: MainTab) {
+        _uiState.value = _uiState.value.copy(
+            selectedTab = tab
+        )
     }
 
+    fun onAddItemClick() {
+        // TODO
+    }
+
+    fun onMenuClick() {
+        // TODO
+    }
+
+    fun onAccountClick() {
+        // TODO
+    }
 }
