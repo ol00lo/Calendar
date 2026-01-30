@@ -1,13 +1,15 @@
-package com.example.calendar.ui.main
+package com.example.calendar.home
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.State
+import com.example.calendar.domain.model.TrackItem
+import com.example.calendar.app.AppTab
 
-class MainViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
 
     private val _uiState = mutableStateOf(
-        MainUiState(
+        HomeUiState(
             recentItems = listOf(
                 TrackItem("Run", "🏃‍♀️"),
                 TrackItem("Smoke", "🚬"),
@@ -15,13 +17,7 @@ class MainViewModel : ViewModel() {
             )
         )
     )
-    val uiState: State<MainUiState> = _uiState
-
-    fun onTabSelected(tab: MainTab) {
-        _uiState.value = _uiState.value.copy(
-            selectedTab = tab
-        )
-    }
+    val uiState: State<HomeUiState> = _uiState
 
     fun onAddItemClick() {
         // TODO

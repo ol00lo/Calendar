@@ -1,4 +1,4 @@
-package com.example.calendar.ui.main
+package com.example.calendar.domain.model
 
 data class TrackItem(
     val name: String,

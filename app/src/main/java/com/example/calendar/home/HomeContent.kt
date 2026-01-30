@@ -1,4 +1,4 @@
-package com.example.calendar.ui.main
+package com.example.calendar.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,11 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
 import androidx.compose.foundation.layout.Spacer
+import com.example.calendar.home.components.RecentItemsBlock
+import com.example.calendar.home.components.SelectedItemsBlock
 
 @Composable
-fun MainContent(
+fun HomeContent(
     modifier: Modifier,
-    state: MainUiState,
+    state: HomeUiState,
     onAddItemClick: () -> Unit
 ) {
     Column(

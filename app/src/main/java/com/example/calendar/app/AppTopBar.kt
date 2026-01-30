@@ -1,4 +1,4 @@
-package com.example.calendar.ui.main
+package com.example.calendar.app
 
 import android.R
 import androidx.compose.material3.*
@@ -7,7 +7,7 @@ import androidx.compose.ui.res.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainTopBar(
+fun AppTopBar(
     onMenuClick: () -> Unit,
     onAccountClick: () -> Unit
 ) {
