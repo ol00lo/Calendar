@@ -1,25 +1,22 @@
 package com.example.calendar.statistics
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
 fun StatisticsScreen(
-    padding: PaddingValues
+    padding: PaddingValues,
+    viewModel: StatisticsViewModel = viewModel()
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(padding),
-        contentAlignment = Alignment.Center
-    ) {
-        Text("statistics (coming soon...)")
-    }
+    val trackedItems = viewModel.trackedItems.collectAsState()
+
+    StatisticsContent(
+        trackedItems = trackedItems.value,
+        modifier = Modifier.padding(padding)
+    )
 }

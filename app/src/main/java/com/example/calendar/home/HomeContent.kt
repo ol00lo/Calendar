@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.foundation.layout.Spacer
+import com.example.calendar.domain.model.TrackItem
 
 import com.example.calendar.home.components.RecentItemsBlock
 import com.example.calendar.home.components.SelectedItemsBlock
@@ -18,6 +19,7 @@ import com.example.calendar.home.components.SelectedItemsBlock
 fun HomeContent(
     modifier: Modifier,
     state: HomeUiState,
+    trackedItems: List<TrackItem>,
     onAddItemClick: () -> Unit
 ) {
     Column(

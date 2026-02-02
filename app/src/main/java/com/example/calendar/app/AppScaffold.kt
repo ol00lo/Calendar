@@ -23,7 +23,7 @@ fun AppScaffold(
     Scaffold(
         topBar = {
             AppTopBar(
-                title = currentTab.title,
+                title = "ebaaCalendar",
                 onMenuClick = onMenuClick,
                 onAccountClick = onAccountClick
             )

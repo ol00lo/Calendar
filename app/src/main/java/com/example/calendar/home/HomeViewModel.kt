@@ -1,26 +1,35 @@
 package com.example.calendar.home
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.calendar.app.TrackItemStore
 
 import com.example.calendar.domain.model.TrackItem
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 
 class HomeViewModel : ViewModel() {
 
-    private val _uiState = mutableStateOf(
-        HomeUiState(
-            recentItems = listOf(
-                TrackItem("Run", "🏃‍♀️"),
-                TrackItem("Smoke", "🚬"),
-                TrackItem("Yoga", "🧘‍♀️")
-            )
-        )
-    )
-    val uiState: State<HomeUiState> = _uiState
+    val trackedItems =
+        TrackItemStore.items.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
-    fun onAddItemClick() {
-        // TODO
+    private val _uiState = MutableStateFlow(HomeUiState())
+    val uiState: StateFlow<HomeUiState> = _uiState
+
+    fun openDialog() {
+        _uiState.update { it.copy(isDialogOpen = true) }
+    }
+
+    fun closeDialog() {
+        _uiState.update { it.copy(isDialogOpen = false) }
+    }
+
+    fun onAddItem(name: String, emoji: String) {
+        TrackItemStore.addItem(TrackItem(name, emoji))
+        closeDialog()
     }
 
     fun onMenuClick() {
