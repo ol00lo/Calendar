@@ -1,7 +1,11 @@
 package com.example.calendar.app
 
-enum class AppTab {
-    HOME,
-    STATS,
-    OTHER
+import com.example.calendar.navigation.AppRoute
+
+enum class AppTab(
+    val route: String,
+    val title: String
+) {
+    HOME(AppRoute.Home.route, "Home"),
+    STATISTICS(AppRoute.Statistics.route, "Statistics"),
 }

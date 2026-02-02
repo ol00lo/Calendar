@@ -5,27 +5,17 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun AppBottomBar(
-    selectedTab: AppTab,
+    currentTab: AppTab,
     onTabSelected: (AppTab) -> Unit
 ) {
     NavigationBar {
-        NavigationBarItem(
-            selected = selectedTab == AppTab.HOME,
-            onClick = { onTabSelected(AppTab.HOME) },
-            label = { Text("Main") },
-            icon = {}
-        )
-        NavigationBarItem(
-            selected = selectedTab == AppTab.STATS,
-            onClick = { onTabSelected(AppTab.STATS) },
-            label = { Text("Statistic") },
-            icon = {}
-        )
-        NavigationBarItem(
-            selected = selectedTab == AppTab.OTHER,
-            onClick = { onTabSelected(AppTab.OTHER) },
-            label = { Text("Other") },
-            icon = {}
-        )
+        AppTab.entries.forEach { tab ->
+            NavigationBarItem(
+                selected = tab == currentTab,
+                onClick = { onTabSelected(tab) },
+                label = { Text(tab.title) },
+                icon = {}
+            )
+        }
     }
 }

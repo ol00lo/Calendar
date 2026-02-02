@@ -8,11 +8,12 @@ import androidx.compose.ui.res.painterResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppTopBar(
+    title: String,
     onMenuClick: () -> Unit,
     onAccountClick: () -> Unit
 ) {
     TopAppBar(
-        title = { Text("ebaCalendar") },
+        title = { Text(title) },
         navigationIcon = {
             IconButton(onClick = onMenuClick) {
                 Icon(
