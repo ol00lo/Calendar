@@ -2,19 +2,19 @@ package com.example.calendar.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.calendar.app.TrackItemStore
 
 import com.example.calendar.domain.model.TrackItem
+import com.example.calendar.domain.repository.TrackItemRepository
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(
+    private val repository: TrackItemRepository
+) : ViewModel() {
 
-    val trackedItems =
-        TrackItemStore.items.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+    val trackedItems = repository.items
 
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState
@@ -28,15 +28,23 @@ class HomeViewModel : ViewModel() {
     }
 
     fun onAddItem(name: String, emoji: String) {
-        TrackItemStore.addItem(TrackItem(name, emoji))
-        closeDialog()
+        viewModelScope.launch {
+            repository.addItem(
+                TrackItem(
+                    id = 0L,
+                    name = name,
+                    emoji = emoji
+                )
+            )
+            closeDialog()
+        }
     }
 
     fun onMenuClick() {
-        // TODO
+        TODO()
     }
 
     fun onAccountClick() {
-        // TODO
+        TODO()
     }
 }

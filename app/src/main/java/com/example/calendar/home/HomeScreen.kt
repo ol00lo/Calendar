@@ -4,23 +4,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.calendar.domain.repository.TrackItemRepository
 import com.example.calendar.home.components.AddItemDialog
 
 
 @Composable
 fun HomeScreen(
     padding: PaddingValues,
-    viewModel: HomeViewModel = viewModel()
+    repository: TrackItemRepository
 ) {
-    val trackedItems = viewModel.trackedItems.collectAsState()
-    val uiState = viewModel.uiState.collectAsState().value
+    val viewModel: HomeViewModel = viewModel(factory = HomeViewModelFactory(repository))
+    val trackedItems by viewModel.trackedItems.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
+
 
     HomeContent(
         modifier = Modifier.padding(padding),
         state = uiState,
-        trackedItems = trackedItems.value,
+        trackedItems = trackedItems,
         onAddItemClick = { viewModel.openDialog() }
     )
 

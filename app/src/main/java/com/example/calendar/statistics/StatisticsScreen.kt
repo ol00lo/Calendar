@@ -6,13 +6,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.calendar.domain.repository.TrackItemRepository
 
 
 @Composable
 fun StatisticsScreen(
     padding: PaddingValues,
-    viewModel: StatisticsViewModel = viewModel()
+    repository: TrackItemRepository
 ) {
+    val viewModel: StatisticsViewModel = viewModel(factory = StatisticsViewModelFactory(repository))
     val trackedItems = viewModel.trackedItems.collectAsState()
 
     StatisticsContent(
